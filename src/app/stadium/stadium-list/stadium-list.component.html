@@ -1,0 +1,73 @@
+<h1>Список стадіонів</h1>
+<input type="button" value="Додати" class="btn btn-primary" (click)="addStadium()" />
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <td>#</td>
+    <td>Назва</td>
+    <td>Дата заснування</td>
+    <td>Адреса</td>
+    <td>Вмістимість</td>
+    <td>Бігові доріжки</td>
+    <td></td>
+    <td></td>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let stadium of stadiums">
+    <ng-template [ngTemplateOutlet]="loadTemplate(stadium)"
+                 [ngTemplateOutletContext]="{ $implicit: stadium}">
+    </ng-template>
+  </tr>
+  </tbody>
+</table>
+<div>{{statusMessage}}</div>
+
+
+<!--шаблон для читання-->
+<ng-template #readOnlyTemplate let-stadium>
+  <td>{{stadium.stadiumId}}</td>
+  <td>{{stadium.name}}</td>
+  <td>{{stadium.foundationDate}}</td>
+  <td>{{stadium.address}}</td>
+  <td>{{stadium.capacity}}</td>
+  <td>
+    <div *ngIf="stadium.treadmill; else other_content"><i class="fas fa-check-circle"></i></div>
+    <ng-template #other_content><span class="fas fa-times"></span></ng-template>
+  </td>
+  <td>
+    <input type="button" value="Змінити" class="btn btn-primary" (click)="editStadium(stadium)" />
+  </td>
+  <td>
+    <input type="button" value="Видалити" (click)="deleteStadium(stadium)" class="btn btn-danger" />
+  </td>
+</ng-template>
+
+<!--шаблон для редагування-->
+<ng-template #editTemplate>
+  <td>
+      <input type="text" [(ngModel)]="editedStadium.stadiumId"  disabled class="form-control" />
+  </td>
+  <td>
+    <input type="text" [(ngModel)]="editedStadium.name" class="form-control" />
+  </td>
+  <td>
+    <input type="date" [(ngModel)]="editedStadium.foundationDate" class="form-control" />
+  </td>
+  <td>
+    <input type="text" [(ngModel)]="editedStadium.address" class="form-control" />
+  </td>
+  <td>
+    <input type="text" [(ngModel)]="editedStadium.capacity" class="form-control" />
+  </td>
+  <td>
+
+    <input  type="checkbox" class="form-control" [(ngModel)]="editedStadium.treadmill" />
+  </td>
+   <td>
+    <input type="button" value="Зберегти" (click)="saveStadium()" class="btn btn-success" />
+  </td>
+  <td>
+    <input type="button" value="Відмінити" (click)="cancel()" class="btn btn-warning" />
+  </td>
+</ng-template>
