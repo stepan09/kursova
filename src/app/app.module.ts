@@ -4,6 +4,14 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
+import {CoachModule} from "./coach/coach.module";
+import {HttpModule} from "@angular/http";
+import {CoachService} from "./coach/coach.service";
+import {FormsModule} from "@angular/forms";
+import {SportsmanModule} from "./sportsman/sportsman.module";
+import {SportsmanService} from "./sportsman/sportsman.service";
+import {StadiumModule} from "./stadium/stadium.module";
+import {HttpClientModule} from "@angular/common/http";
 
 
 @NgModule({
@@ -12,9 +20,19 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    CoachModule,
+    SportsmanModule,
+    StadiumModule,
+    HttpClientModule,
+    HttpModule,
+    FormsModule,
   ],
-  providers: [],
+  providers: [
+    CoachService,
+    SportsmanService,
+    StadiumModule
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
