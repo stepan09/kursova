@@ -11,7 +11,7 @@ import {CoachService} from "./coach.service";
   imports: [
     CommonModule,
     CoachRoutingModule,
-    FormsModule
+    FormsModule,
   ],
   declarations: [CoachCreateComponent, CoachListComponent],
   providers: [CoachService]

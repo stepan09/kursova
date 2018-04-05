@@ -1,6 +1,6 @@
 import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
-import {StadiumService} from "../stadium.service";
-import {Stadium} from "../stadium";
+import {StadiumService} from '../stadium.service';
+import {Stadium} from '../stadium';
 import 'rxjs/Rx';
 
 @Component({
@@ -18,7 +18,6 @@ export class StadiumListComponent implements OnInit {
   stadiums: Array<Stadium>;
   isNewRecord: boolean;
   statusMessage: string;
-  values: string[] = ["true", "false"];
 
   constructor(private serv: StadiumService) {
     this.stadiums = new Array<Stadium>();
@@ -31,17 +30,17 @@ export class StadiumListComponent implements OnInit {
   private loadStadiums() {
     this.serv.getStadiums().subscribe((data: Stadium[]) => {
       this.stadiums = data;
-    })
+    });
   }
 
   addStadium() {
-    this.editedStadium = new Stadium(0,"", null, "", 0, null);
+    this.editedStadium = new Stadium(0, '', null, '', 0, null);
     this.stadiums.push(this.editedStadium);
     this.isNewRecord = true;
   }
 
   editStadium(stadium: Stadium) {
-    this.editedStadium = new Stadium(stadium.stadiumId ,stadium.name, stadium.foundationDate, stadium.address, stadium.capacity, stadium.treadmill);
+    this.editedStadium = new Stadium(stadium.stadiumId , stadium.name, stadium.foundationDate, stadium.address, stadium.capacity, stadium.treadmill);
   }
 
   loadTemplate(stadium: Stadium) {
@@ -78,7 +77,7 @@ export class StadiumListComponent implements OnInit {
   }
 
   deleteStadium(stadium: Stadium) {
-    this.serv.deleteStadium(stadium.stadiumId).subscribe(data=> {
+    this.serv.deleteStadium(stadium.stadiumId).subscribe(data => {
       this.statusMessage = 'Дані успішно видалені',
         this.loadStadiums();
     });

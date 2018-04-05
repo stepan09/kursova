@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Stadium} from "./stadium";
+import {HttpClient} from '@angular/common/http';
+import {Stadium} from './stadium';
 
 @Injectable()
 export class StadiumService {
 
-  private url = "http://localhost:8080/api/stadiums";
+  private url = 'http://localhost:8080/api/stadiums';
 
   constructor(private http: HttpClient) { }
 
-  getStadiums(){
+  getStadiums() {
     return this.http.get(this.url);
   }
 
@@ -18,10 +18,10 @@ export class StadiumService {
   }
 
   updateStadium(id: number, stadium: Stadium) {
-    return this.http.put(this.url + "/" + id, stadium);
+    return this.http.put(this.url + '/' + id, stadium);
   }
 
   deleteStadium(id: number) {
-    return this.http.delete(this.url + "/" + id );
+    return this.http.delete(this.url + '/' + id );
   }
 }

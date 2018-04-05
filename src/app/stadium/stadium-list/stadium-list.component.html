@@ -1,5 +1,7 @@
 <h1>Список стадіонів</h1>
-<input type="button" value="Додати" class="btn btn-primary" (click)="addStadium()" />
+<button mat-icon-button color="warn" (click)="addStadium()">
+  <mat-icon>person_add</mat-icon>
+</button>
 <table class="table table-striped">
   <thead>
   <tr>
@@ -32,8 +34,8 @@
   <td>{{stadium.address}}</td>
   <td>{{stadium.capacity}}</td>
   <td>
-    <div *ngIf="stadium.treadmill; else other_content"><i class="fas fa-check-circle"></i></div>
-    <ng-template #other_content><span class="fas fa-times"></span></ng-template>
+    <div *ngIf="stadium.treadmill; else other_content"><i style="color: limegreen" class="material-icons">done</i></div>
+    <ng-template #other_content><i style="color: #ff0f42" class="material-icons">close</i></ng-template>
   </td>
   <td>
     <input type="button" value="Змінити" class="btn btn-primary" (click)="editStadium(stadium)" />
@@ -49,20 +51,34 @@
       <input type="text" [(ngModel)]="editedStadium.stadiumId"  disabled class="form-control" />
   </td>
   <td>
-    <input type="text" [(ngModel)]="editedStadium.name" class="form-control" />
+    <mat-form-field>
+      <input matInput type="text" placeholder="Назва" [(ngModel)]="editedStadium.name" class="form-control" />
+        <button mat-button *ngIf="editedStadium.name" matSuffix mat-icon-button aria-label="Clear" (click)="editedStadium.name=''">
+          <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
   </td>
   <td>
     <input type="date" [(ngModel)]="editedStadium.foundationDate" class="form-control" />
   </td>
   <td>
-    <input type="text" [(ngModel)]="editedStadium.address" class="form-control" />
+    <mat-form-field>
+      <input matInput type="text" placeholder="Адреса" [(ngModel)]="editedStadium.address" class="form-control" />
+        <button mat-button *ngIf="editedStadium.name" matSuffix mat-icon-button aria-label="Clear" (click)="editedStadium.name=''">
+          <mat-icon>close</mat-icon>
+        </button>
+    </mat-form-field>
   </td>
   <td>
-    <input type="text" [(ngModel)]="editedStadium.capacity" class="form-control" />
+    <mat-form-field>
+    <input matInput type="text" placeholder="Вмістимість" [(ngModel)]="editedStadium.capacity" class="form-control" />
+    <button mat-button *ngIf="editedStadium.name" matSuffix mat-icon-button aria-label="Clear" (click)="editedStadium.name=''">
+      <mat-icon>close</mat-icon>
+    </button>
+    </mat-form-field>
   </td>
   <td>
-
-    <input  type="checkbox" class="form-control" [(ngModel)]="editedStadium.treadmill" />
+    <mat-checkbox [(ngModel)]="editedStadium.treadmill"></mat-checkbox>
   </td>
    <td>
     <input type="button" value="Зберегти" (click)="saveStadium()" class="btn btn-success" />
